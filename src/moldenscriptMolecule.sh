@@ -31,6 +31,7 @@ printf "$C1z\n$H1z\n$H2z\n$H3z\n$H4z\n" > z_initial.txt
 
 
 
+
 #copy the basis part of the molden to basis.txt
 Awk '/\[Molden Format\]/,/\[MO\]/  {print $0}' $1 > basis.txt
 
@@ -331,6 +332,8 @@ done
 sed -E 's/([+-]?[0-9.]+)[D]\+?(-?)([0-9]+)/\1E\2\3/g' $1.csv > temp
 awk -F ',' '{if ($9 != "0\.0") print $0;}' temp  > temp1
 awk -F ',' '{if ($5 != "0\.0000000000E00") print $0;}' temp1  > $1.csv
+
+
 
 Rm ContractedCoeffs_Final.txt ijk_final.txt Exponent_Final.txt Weight_Final.txt x.txt y.txt z.txt basis.txt orbitals.txt contractedCoeffsTemp.txt typeOfOrb_NumOfPrims.txt TypeOfOrb_Final.txt NumOfPrims_Final.txt ExponentTemp.txt WeightTemp.txt Exponents_Together.txt Weights_Together.txt ijk_Final1.txt ContractedCoeffs.txt temp temp1
 

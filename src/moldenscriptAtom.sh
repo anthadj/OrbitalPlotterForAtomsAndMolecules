@@ -16,7 +16,8 @@ printf "$H1x\n" > x.txt
 printf "$H1y\n" > y.txt
 printf "$H1z\n" > z.txt
 
-
+echo orbitalToFind = "$2"
+echo "Orbital to find: $orbitalToFind"
 
 #copy the basis part of the molden to basis.txt
 Awk '/\[Molden Format\]/,/\[MO\]/  {print $0}' $1 > basis.txt
@@ -35,6 +36,7 @@ numcs=$(($(grep -n "s" $1 | sed -n 3p | awk '{print $1}' | sed -e 's/:.*//g')-7)
 #grab the coefficient for a certain orbital energy, as ranged by 1.1 to 2.1 currently to get the lowest energy orbital
 #TODO: Change depending on what orbital you want to calculate
 Awk '/ Sym=      1.1/,/ Sym=      2.1/  {print $2 }' orbitals.txt > contractedCoeffsTemp.txt
+#Awk '/ Sym=      $orbitalToFind/,/ Sym=      2.1/  {print $2 }' orbitals.txt > contractedCoeffsTemp.txt
 sed -e '1,4d' < contractedCoeffsTemp.txt > ContractedCoeffs.txt
 sed -i '' -e '$ d' ContractedCoeffs.txt
 
